@@ -26,11 +26,11 @@ spec:
   }
   stages {
     stage('checkout') {
-      steps {
-        container('maven') {
-          git https://github.com/rsuela/reservations
-        }
-      }
+      echo 'checkout'
+    }
+    
+    stage('build') {
+      echo 'build' 
     }
   }
 }
