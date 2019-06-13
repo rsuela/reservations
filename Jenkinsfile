@@ -26,11 +26,11 @@ spec:
   }
   stages {
     stage('checkout') {
-      echo 'checkout'
+      sh 'echo checkout'
     }
     
     stage('build') {
-      echo 'build' 
+      sh 'echo build' 
     }
   }
 }
