@@ -32,5 +32,26 @@ spec:
         }
       }
     }
+    stage('build') {
+      steps {
+        container('maven'){
+          sh 'echo build'
+        }
+      }
+    }
+    stage('test') {
+      steps {
+        container('maven'){
+          sh 'echo test'
+        }
+      }
+    }
+    stage('dist') {
+      steps {
+        container('maven'){
+          sh 'echo dist'
+        }
+      }
+    }
   }
 }
