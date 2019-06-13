@@ -32,12 +32,5 @@ spec:
         }
       }
     }
-    
-    stage('build') {
-      steps {
-        container('maven'){
-          sh 'echo build'
-        }
-    }
   }
 }
