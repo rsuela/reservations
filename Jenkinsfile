@@ -28,7 +28,7 @@ spec:
     stage('checkout') {
       steps {
         container('maven'){
-          sh 'echo checkout'
+          git 'https://github.com/rsuela/reservations'
         }
       }
     }
