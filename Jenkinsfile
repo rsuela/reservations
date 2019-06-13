@@ -35,21 +35,21 @@ spec:
     stage('build') {
       steps {
         container('maven'){
-          sh 'echo build'
+          sh "mvn -Dmaven.test.failure.ignore clean package"
         }
       }
     }
     stage('test') {
       steps {
         container('maven'){
-          sh 'echo test'
+          junit '**/target/surefire-reports/TEST-*.xml'
         }
       }
     }
-    stage('dist') {
+    stage('archive') {
       steps {
         container('maven'){
-          sh 'echo dist'
+          archive 'target/*.jar'
         }
       }
     }
