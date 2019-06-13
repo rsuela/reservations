@@ -26,11 +26,18 @@ spec:
   }
   stages {
     stage('checkout') {
-      sh 'echo checkout'
+      steps {
+        container('maven'){
+          sh 'echo checkout'
+        }
+      }
     }
     
     stage('build') {
-      sh 'echo build' 
+      steps {
+        container('maven'){
+          sh 'echo build'
+        }
     }
   }
 }
