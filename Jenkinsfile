@@ -24,4 +24,7 @@ pipeline {
       }
     }
   }
+  post {
+    logstashSend failBuild: true, maxLines: 1000
+  }
 }
