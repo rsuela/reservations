@@ -33,7 +33,7 @@ pipeline {
             container('maven') {
                 junit '**/target/surefire-reports/TEST-*.xml'
             }
-          logstashSend failBuild: true, maxLines: 1000
+          //logstashSend failBuild: true, maxLines: 1000
       }
   }
 }
