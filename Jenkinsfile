@@ -1,31 +1,38 @@
 pipeline {
     agent {
-        label 'java-jnlp'
+        kubernetes {
+          label 'node-reactapi'
+          yamlFile 'KubernetesPod.yaml'
+        }
     }
   stages {
-    stage('checkout') {
+    stage('Checkout') {
       steps {
-          git 'https://github.com/rsuela/reservations'
+        container('maven') {
+          checkout scm
+        }
       }
     }
     stage('build') {
       steps {
-          sh "mvn -Dmaven.test.failure.ignore clean package"
-      }
-    }
-    stage('test') {
-      steps {
-          junit '**/target/surefire-reports/TEST-*.xml'
+          container('maven') {
+            sh "mvn -Dmaven.test.failure.ignore clean package"
+          }
       }
     }
     stage('archive') {
       steps {
-          archive 'target/*.jar'
+          container('maven') {
+            archive 'target/*.jar'
+          }
       }
     }
   }
   post {
       always{
+            container('maven') {
+                junit '**/target/surefire-reports/TEST-*.xml'
+            }
           logstashSend failBuild: true, maxLines: 1000
       }
   }
